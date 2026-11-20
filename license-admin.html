@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>مولّد مفاتيح التفعيل — خاص بصاحب الأداة</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--grad:linear-gradient(135deg,#4f46e5,#7c3aed 55%,#06b6d4 120%)}
+body{font-family:'Tajawal',system-ui,sans-serif;min-height:100vh;color:#e8ebff;background:radial-gradient(60% 50% at 15% 0,rgba(99,102,241,.45),transparent 70%),radial-gradient(50% 50% at 90% 10%,rgba(6,182,212,.35),transparent 70%),#060a17;padding:28px 16px 60px}
+.wrap{max-width:860px;margin:auto}
+h1{font-size:28px;font-weight:800;letter-spacing:-.6px;margin-bottom:6px;display:flex;align-items:center;gap:12px}
+h1 i{font-style:normal;width:48px;height:48px;border-radius:15px;background:var(--grad);display:flex;align-items:center;justify-content:center;box-shadow:0 12px 28px -8px rgba(79,70,229,.7)}
+.sub{color:#a5b4fc;margin-bottom:22px;line-height:1.7}
+.warn{background:rgba(245,158,11,.14);border:1px solid rgba(251,191,36,.5);color:#fde68a;border-radius:14px;padding:12px 14px;margin-bottom:20px;font-size:13.5px;line-height:1.7}
+.card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:22px;padding:22px;margin-bottom:18px;-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);box-shadow:0 24px 60px -24px rgba(0,0,0,.6)}
+.card h2{font-size:17px;margin-bottom:14px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:640px){.grid{grid-template-columns:1fr}}
+label{display:block;font-size:12.5px;font-weight:700;color:#c7d2fe;margin-bottom:6px}
+input,select,textarea{width:100%;font-family:inherit;font-size:14px;padding:12px 14px;border-radius:12px;border:1.5px solid rgba(255,255,255,.22);background:rgba(6,10,23,.6);color:#fff;outline:none}
+input:focus,select:focus,textarea:focus{border-color:#818cf8;box-shadow:0 0 0 4px rgba(99,102,241,.25)}
+select option{color:#111}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:inherit;font-weight:800;font-size:14px;padding:13px 22px;border-radius:13px;border:0;cursor:pointer;color:#fff;background:var(--grad);box-shadow:0 12px 26px -8px rgba(79,70,229,.7);transition:.2s;text-decoration:none}
+.btn:hover{transform:translateY(-2px)}
+.btn.g{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);box-shadow:none}
+.btn.wa{background:linear-gradient(135deg,#16a34a,#22c55e)}
+.btn.sm{padding:8px 13px;font-size:12.5px;border-radius:10px}
+.key{font-family:ui-monospace,Menlo,Consolas,monospace;direction:ltr;text-align:left;font-size:12.5px;letter-spacing:.4px;min-height:96px;resize:vertical}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.chip{display:inline-block;padding:5px 12px;border-radius:999px;background:rgba(16,185,129,.18);border:1px solid rgba(52,211,153,.5);color:#6ee7b7;font-weight:800;font-size:12.5px}
+.chip.r{background:rgba(239,68,68,.16);border-color:rgba(248,113,113,.5);color:#fca5a5}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{padding:10px 8px;text-align:start;border-bottom:1px solid rgba(255,255,255,.1);vertical-align:middle}
+th{color:#a5b4fc;font-weight:700}
+.empty{color:#8b97c9;text-align:center;padding:18px}
+.tip{color:#8b97c9;font-size:12.5px;line-height:1.7;margin-top:10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1><i>🔑</i> مولّد مفاتيح التفعيل</h1>
+  <p class="sub">من هنا كتصاوب مفاتيح باش تعطي الأداة لشي زبون بمدة محددة (تجربة 24 ساعة مثلاً). ملي كتسالي المدة، الأداة كتقفل وحدها حتى تعطيه مفتاح جديد.</p>
+  <div class="warn">⚠️ <b>هاد الملف سري.</b> ما تعطيهش لحتى واحد وما تنشرهوش. اللي عندو هاد الملف يقدر يصاوب مفاتيح بلا حدود. الزبون كيتوصل غير بالمفتاح (النص الطويل) وبملف الأداة landing-page-generator-onefile.html.</div>
+
+  <div class="card">
+    <h2>1) صاوب مفتاح جديد</h2>
+    <div class="grid">
+      <div><label>اسم الزبون / ملاحظة (اختياري، كيبقى عندك فالسجل)</label><input id="who" placeholder="مثال: أحمد — تجربة"></div>
+      <div><label>المدة</label>
+        <select id="dur">
+          <option value="1440" selected>24 ساعة (تجربة)</option>
+          <option value="2880">48 ساعة</option>
+          <option value="4320">3 أيام</option>
+          <option value="10080">7 أيام</option>
+          <option value="20160">14 يوم</option>
+          <option value="43200">30 يوم</option>
+          <option value="525600">سنة كاملة</option>
+          <option value="life">مدى الحياة (بعد الشراء)</option>
+          <option value="custom">مدة مخصصة بالساعات…</option>
+        </select></div>
+      <div id="customBox" style="display:none"><label>عدد الساعات</label><input id="customH" type="number" min="1" value="12"></div>
+      <div id="modeBox"><label>كيف كتبدا المدة؟</label>
+        <select id="mode">
+          <option value="0" selected>كتبدا من دابا (الأضمن — الزبون ما يقدرش يعاود يبدا)</option>
+          <option value="1">كتبدا ملي الزبون يفعّل المفتاح لأول مرة</option>
+        </select></div>
+    </div>
+    <div class="row"><button class="btn" id="gen">✨ صاوب المفتاح</button></div>
+    <div id="out" style="display:none;margin-top:18px">
+      <label>المفتاح (كوبيه وصيفطو للزبون)</label>
+      <textarea id="keyOut" class="key" readonly></textarea>
+      <div class="row" style="align-items:center"><span class="chip" id="expChip"></span></div>
+      <div class="row">
+        <button class="btn g" id="copy">📋 نسخ المفتاح</button>
+        <a class="btn wa" id="wa" target="_blank" rel="noopener">💬 صيفطو فواتساب</a>
+      </div>
+    </div>
+    <p class="tip">نصيحة: صاوب المفتاح فاللحظة اللي غادي تصيفطو فيها، حيث فنوع "كتبدا من دابا" المدة كتبدا تتحسب من ساع الإنشاء.</p>
+  </div>
+
+  <div class="card">
+    <h2>2) جرّب مفتاح</h2>
+    <textarea id="chk" class="key" placeholder="لصق مفتاح باش تشوف واش صالح وفاش غادي يسالي"></textarea>
+    <div class="row" style="align-items:center"><button class="btn g" id="vbtn">🔍 تحقق</button><span id="vres"></span></div>
+  </div>
+
+  <div class="card">
+    <h2>3) سجل المفاتيح اللي صاوبتي</h2>
+    <div id="hist"></div>
+    <div class="row"><button class="btn g sm" id="clr">🗑 مسح السجل</button></div>
+    <p class="tip">السجل كيتخزن غير فهاد المتصفح. المفتاح مبقاش يتلغى بعد ما كيتعطى: كيبقى صالح حتى تسالي مدتو (أو دائماً فحالة "مدى الحياة"). علاش كتفضل المدد القصيرة.</p>
+  </div>
+</div>
+<script>
+var PRIV={"key_ops":["sign"],"ext":true,"kty":"EC","x":"KIt3HUIyLOxUllgxUUBrG1fiK-kWLSKcQsddqxSnNzI","y":"jscNKdQeDyni0pee_G89a4jvb7FmrhHaoXQOWtqY9pw","crv":"P-256","d":"QizjAGa_2LaRkTyEQSRFFu26iic9TTRY27IPVvRu7QM"};
+var PUB={"key_ops":["verify"],"ext":true,"kty":"EC","x":"KIt3HUIyLOxUllgxUUBrG1fiK-kWLSKcQsddqxSnNzI","y":"jscNKdQeDyni0pee_G89a4jvb7FmrhHaoXQOWtqY9pw","crv":"P-256"};
+var B32='ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
+function b32enc(u8){var bits=0,val=0,out='';for(var i=0;i<u8.length;i++){val=((val<<8)|u8[i])&0xFFFFF;bits+=8;while(bits>=5){out+=B32[(val>>>(bits-5))&31];bits-=5;val&=(1<<bits)-1;}}if(bits>0)out+=B32[(val<<(5-bits))&31];return out;}
+function b32dec(str){var bits=0,val=0,out=[];for(var i=0;i<str.length;i++){var k=B32.indexOf(str[i]);if(k<0)continue;val=((val<<5)|k)&0xFFFFF;bits+=5;if(bits>=8){out.push((val>>>(bits-8))&255);bits-=8;val&=(1<<bits)-1;}}return new Uint8Array(out);}
+async function parseKey(raw,pubJwk){
+  var s=String(raw||'').toUpperCase().replace(/[^A-Z0-9]/g,''); if(s.indexOf('LPG')===0) s=s.slice(3);
+  var b=b32dec(s); if(b.length<72) return null;
+  var payload=b.slice(0,8), sig=b.slice(8,72);
+  if(payload[0]!==1) return null;
+  var pk=await crypto.subtle.importKey('jwk',pubJwk,{name:'ECDSA',namedCurve:'P-256'},false,['verify']);
+  var ok=await crypto.subtle.verify({name:'ECDSA',hash:'SHA-256'},pk,sig,payload);
+  if(!ok) return null;
+  return {mode:payload[1],val:((payload[2]<<24)|(payload[3]<<16)|(payload[4]<<8)|payload[5])>>>0,id:(payload[6]<<8)|payload[7]};
+}
+
+/* mode: 0 = ينتهي فوقت محدد (val = unix seconds) | 1 = المدة كتبدا من أول استعمال (val = minutes) | 2 = دائم */
+async function makeKey(privJwk,mode,val){
+  var pk=await crypto.subtle.importKey('jwk',privJwk,{name:'ECDSA',namedCurve:'P-256'},false,['sign']);
+  var r=crypto.getRandomValues(new Uint8Array(2)); val=val>>>0;
+  var payload=new Uint8Array([1,mode,(val>>>24)&255,(val>>>16)&255,(val>>>8)&255,val&255,r[0],r[1]]);
+  var sig=new Uint8Array(await crypto.subtle.sign({name:'ECDSA',hash:'SHA-256'},pk,payload));
+  var all=new Uint8Array(72); all.set(payload,0); all.set(sig,8);
+  return 'LPG-'+b32enc(all).match(/.{1,6}/g).join('-');
+}
+
+var $=function(i){return document.getElementById(i);};
+var HK='lpg_admin_hist_v1';
+function hist(){try{return JSON.parse(localStorage.getItem(HK)||'[]');}catch(e){return [];}}
+function saveHist(a){try{localStorage.setItem(HK,JSON.stringify(a));}catch(e){}}
+function esc(x){return String(x==null?'':x).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+function fdate(ms){return new Date(ms).toLocaleString('ar-MA',{dateStyle:'medium',timeStyle:'short'});}
+function human(min){if(min>=1440){var d=Math.round(min/1440);return d+' يوم';}return Math.round(min/60)+' ساعة';}
+$('dur').addEventListener('change',function(){var v=this.value;$('customBox').style.display=v==='custom'?'block':'none';$('modeBox').style.display=v==='life'?'none':'block';});
+$('gen').addEventListener('click',async function(){
+  var v=$('dur').value, mode, val, desc, expMs=0;
+  if(v==='life'){mode=2;val=0;desc='مدى الحياة';}
+  else{
+    var min=v==='custom'?Math.max(1,Math.round((+$('customH').value||1)*60)):+v;
+    mode=+$('mode').value; desc=human(min);
+    if(mode===0){expMs=Date.now()+min*60000;val=Math.floor(expMs/1000);}else{val=min;}
+  }
+  var key=await makeKey(PRIV,mode,val);
+  $('keyOut').value=key; $('out').style.display='block';
+  var chip=$('expChip'); chip.className='chip';
+  chip.textContent=mode===2?'مدى الحياة ♾':(mode===0?('ينتهي: '+fdate(expMs)):('المدة: '+desc+' من أول تفعيل'));
+  var msg='السلام عليكم، هادا مفتاح تفعيل أداة مولّد الصفحات ('+desc+'):\n\n'+key+'\n\nافتح الأداة، لصق المفتاح وداير تفعيل.';
+  $('wa').href='https://wa.me/?text='+encodeURIComponent(msg);
+  var h=hist(); h.unshift({t:Date.now(),who:$('who').value.trim(),desc:desc,mode:mode,exp:expMs,key:key}); saveHist(h.slice(0,200)); render();
+});
+$('copy').addEventListener('click',function(){var t=$('keyOut');t.select();try{navigator.clipboard.writeText(t.value);}catch(e){document.execCommand('copy');}this.textContent='✅ تنسخ';var b=this;setTimeout(function(){b.textContent='📋 نسخ المفتاح';},1500);});
+$('vbtn').addEventListener('click',async function(){
+  var r=$('vres'),p=await parseKey($('chk').value,PUB).catch(function(){return null;});
+  if(!p){r.className='chip r';r.textContent='❌ مفتاح غير صالح';return;}
+  if(p.mode===2){r.className='chip';r.textContent='✅ صالح — مدى الحياة';return;}
+  if(p.mode===1){r.className='chip';r.textContent='✅ صالح — '+human(p.val)+' من أول تفعيل';return;}
+  var ms=p.val*1000;r.className='chip'+(ms<Date.now()?' r':'');r.textContent=(ms<Date.now()?'⛔ منتهي منذ ':'✅ صالح حتى ')+fdate(ms);
+});
+function render(){
+  var h=hist(),el=$('hist');
+  if(!h.length){el.innerHTML='<div class="empty">ما كاين حتى مفتاح بعد.</div>';return;}
+  el.innerHTML='<table><thead><tr><th>التاريخ</th><th>الزبون</th><th>المدة</th><th>الحالة</th><th></th></tr></thead><tbody>'+h.map(function(x,i){
+    var st=x.mode===2?'<span class="chip">دائم</span>':(x.mode===1?'<span class="chip">من أول تفعيل</span>':(x.exp<Date.now()?'<span class="chip r">منتهي</span>':'<span class="chip">ساري حتى '+esc(fdate(x.exp))+'</span>'));
+    return '<tr><td>'+esc(fdate(x.t))+'</td><td>'+esc(x.who||'—')+'</td><td>'+esc(x.desc)+'</td><td>'+st+'</td><td><button class="btn g sm" data-c="'+i+'">نسخ</button></td></tr>';
+  }).join('')+'</tbody></table>';
+  Array.prototype.forEach.call(el.querySelectorAll('[data-c]'),function(b){b.addEventListener('click',function(){var k=hist()[+b.dataset.c].key;try{navigator.clipboard.writeText(k);}catch(e){}b.textContent='✅';setTimeout(function(){b.textContent='نسخ';},1200);});});
+}
+$('clr').addEventListener('click',function(){if(confirm('تمسح السجل؟')){saveHist([]);render();}});
+render();
+</script>
+</body>
+</html>
